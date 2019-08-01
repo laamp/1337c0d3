@@ -20,25 +20,46 @@
   P     I
 */
 
-var convert = function (s, numRows) {
-  let sArr = s.split("");
-  let numCols = Math.ceil(sArr.length / 2.0);
-  let arr = [];
+const convert = function (s, numRows) {
+  let charMap = [];
+  for (let i = 0; i < numRows; i++) charMap.push([]);
 
-  let newCol = [];
-  while (sArr.length > 0) {
-    let currChar = sArr.shift();
-
-    if (newCol.length < numRows) {
-      newCol.push(currChar);
+  let rowPointer = 0;
+  let movingDown = true;
+  for (let i = 0; i < s.length; i++) {
+    if (movingDown) {
+      charMap[rowPointer].push(s[i]);
+      rowPointer++;
+      if (rowPointer >= numRows) {
+        rowPointer--;
+        movingDown = false;
+      }
     } else {
-      arr.push(newCol);
-      newCol = new Array([]);
-      newCol.push(currChar);
+      rowPointer--;
+      if (rowPointer === 0) {
+        charMap[rowPointer].push(s[i]);
+        rowPointer++;
+        movingDown = true;
+      } else {
+        for (let j = 0; j < numRows; j++) {
+          if (j === rowPointer) {
+            charMap[j].push(s[i]);
+          } else {
+            charMap[j].push(' ');
+          }
+        }
+      }
     }
   }
 
-  return arr;
+  let finalString = '';
+  charMap.forEach(arr => {
+    arr.forEach(letter => {
+      if (letter !== ' ') finalString += letter;
+    });
+  });
+
+  return finalString;
 };
 
-console.log(convert("PAYPALISHIRING"));
+console.log(convert("PAYPALISHIRING", 3));
