@@ -7,6 +7,19 @@
     Input: "23"
     Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
 
+    23 goes to letterCombinations
+    "", 23
+    go to else block
+    for loop will go through each value in '2' array
+        recursive call ("" + "a", 3)
+            for loop will go through each value in '3' array
+                recursive call ('a' + 'd', '') 
+                    'ad' gets pushed in next call
+                recursive call ('a' + 'e', '')
+                    'ae' gets pushed in next call
+                recursive call ('a' + 'f', '')
+                    'af' gets pushed in next call
+    lines 14-21 repeat for 'b' and 'c'
 */
 
 const keys = {
