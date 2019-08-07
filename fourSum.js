@@ -41,6 +41,7 @@ var fourSum = function (nums, target) {
     return validSets;
 };
 
+/* solution from yinsheng on leetcode for analysis */
 var fourSum2 = function (nums, target) {
     let ret = [];
 
